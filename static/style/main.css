@@ -1,0 +1,51 @@
+/*Base styles for all pages*/
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Tahoma', 'Arial';
+}
+html, body {
+  height: 100%;
+}
+#aside {
+  float: left;
+  width: 15%;
+  height: 100%;
+  overflow: auto;
+  border-right: 1px solid #000;
+}
+li {
+  border-bottom: 1px solid #000;
+  padding: 15px;
+  list-style: none;
+  color: #000;
+}
+#main {
+  float: left;
+  width: 50%;
+  padding: 15px;
+  overflow: hidden;
+}
+#head {
+  background-color: #f1f1f1;
+}
+
+/*Styles to manage edit-delete controls*/
+#controls {margin-top: 15px;}
+#controls>a>input {
+  width: 165px;
+  font-size: 1.1em;
+}
+
+/*Styles for the for the add/edit form*/
+#editDb {float: left; width: 450px;}
+#editDb>div {padding-bottom: 5px;}
+#editDb>div>input {float: right; width: 250px;}
+#editDb>div>select {float: right; width: 255px; font-size: 1em;}
+#editDb>div>#submit {width: 165px; font-size: 1.1em;}
+
+/*Styles for the add person form on the organisation's page*/
+#addPartOf {margin-top: 15px;}
+#addPartOf>select {float: left; width: 165px;font-size: 1.1em;}
+#addPartOf>input {float: left; width: 165px; margin-left: 5px; font-size: 1.1em;}
