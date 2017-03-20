@@ -38,7 +38,7 @@ def getDetails(id):
 
     return details
 
-#queries database for specific contact id and returns the name
+# queries database for specific contact id and returns the name
 def getName(id):
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
@@ -48,7 +48,7 @@ def getName(id):
     c.close()
     return name
 
-#queries database for several contact ids
+# queries database for several contact ids
 #   output: [[name, id], [name, id], ...]
 def getNames(ids):
     conn = sqlite3.connect('database.db')
@@ -61,7 +61,7 @@ def getNames(ids):
     c.close()
     return names
 
-#parses the add new form query, which is also used for the editing contacts
+# parses the add new form query, which is also used for the editing contacts
 def getQuery():
     name = request.query.name
     addrOne = request.query.addrOne
@@ -71,12 +71,12 @@ def getQuery():
     phone = request.query.number
     return (name,addrOne,addrTwo,addrThree,email,phone)
 
-#static file-path, allows for adding more scripts / styles later
+# static file-path, allows for adding more scripts / styles later
 @route('/static/<type>/<filename>')
 def server_static(type, filename):
     return static_file(filename, root='static/'+type)
 
-#basic home-page, utilies a 'base' template for further expansion.
+# basic home-page, uses a 'base' template for further expansion.
 @route('/')
 def main():
     contdict = getAll()
@@ -85,7 +85,7 @@ def main():
 
     return template('base.tpl', contdict=contdict)
 
-#contact page view, uses a skeleton contact for both organisations and people
+# contact page view, uses a skeleton contact for both organisations and people
 @route('/contact/<id>')
 def contact(id):
     contdict = getAll()
@@ -94,7 +94,7 @@ def contact(id):
 
     return template('contact.tpl', contdict=contdict)
 
-#add page view, the template is used by the edit view, so initial values are set
+# add page view, the template is used by the edit view, so initial values are set
 #   to blank and the name of the action (add) is given too.
 @route('/add/<contact>')
 def add(contact):
@@ -104,7 +104,7 @@ def add(contact):
 
     return template('add.tpl', contdict=contdict)
 
-#addNew form handler, uses an insert query. redirects to the new contact once finished.
+# addNew form handler, uses an insert query. redirects to the new contact once finished.
 @route('/addNew/<contact>', method="GET")
 def do_add(contact):
     conn = sqlite3.connect('database.db')
@@ -117,7 +117,7 @@ def do_add(contact):
     c.close()
     redirect('/contact/'+contactid)
 
-#edit page view, same as the add view except action is set to edit and the id is
+# edit page view, same as the add view except action is set to edit and the id is
 #   already known.
 @route('/edit/<id>')
 def edit(id):
@@ -128,7 +128,7 @@ def edit(id):
 
     return template('add.tpl', contdict=contdict)
 
-#edit form handler
+# edit form handler
 @route('/editContact/<id>', method="GET")
 def do_edit(id):
     conn = sqlite3.connect('database.db')
@@ -140,8 +140,7 @@ def do_edit(id):
     c.close()
     redirect('/contact/'+id)
 
-#delete page view, as deleting is a permanent process, this page is used a validator
-
+# delete page view, as deleting is a permanent process, this page is used a validator
 @route('/delete/<id>')
 def delete(id):
     contdict=getAll()
@@ -150,7 +149,7 @@ def delete(id):
 
     return template('delete.tpl', contdict=contdict)
 
-#delete handler, removes the contact from the database and any any relationships
+# delete handler, removes the contact from the database and any any relationships
 #   it may have hande. Redirects to main page
 @route('/fullDelete/<id>')
 def do_delete(id):
@@ -165,7 +164,7 @@ def do_delete(id):
 
     redirect('/')
 
-#removes people from an organisation, redirects back to the organisation
+# removes people from an organisation, redirects back to the organisation
 @route('/remove/<ida>/<idb>')
 def do_remove(ida,idb):
     conn = sqlite3.connect('database.db')
@@ -180,7 +179,7 @@ def do_remove(ida,idb):
 
     redirect('/contact/'+ida)
 
-#adds people to an organisation, redirects back to the organisation
+# adds people to an organisation, redirects back to the organisation
 @route('/addPartOf/<id>', method='GET')
 def do_addPartOf(id):
     contact = request.query.contact
@@ -198,5 +197,5 @@ def do_addPartOf(id):
 
     redirect('/contact/'+id)
 
-#runs the full website
+# runs the full website
 run(host='localhost', port=8080, debug=True)
