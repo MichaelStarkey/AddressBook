@@ -24,13 +24,13 @@
     % if contdict['details'][7] != []:
       % if contdict['details'][6] == 'person':
           <strong>Organisations:</strong><br />
-      % elif contdict['details'][6] == 'organisation' and contdict['details'][7] != []:
+      % elif contdict['details'][6] == 'organisation':
           <strong>People:</strong><br />
       % end
-        %for c in contdict['details'][7]:
+        % for c in contdict['details'][7]:
         <a href="/contact/{{c[1]}}">{{c[0]}}</a>
         <a href="/remove/{{contdict['id']}}/{{c[1]}}"><input value="Remove" type="button" /><br />
-        %end
+        % end
     % end
     <div id="controls">
         <a href="/edit/{{contdict['id']}}"><input value="Edit" type="button" /></a>
@@ -44,15 +44,15 @@
       <select form="addPartOf" name="contact">
         <option value="None"></option>
     % if contdict['details'][6] == 'organisation':
-          %for p in [p for p in contdict['people'] if p not in contdict['details'][7]]:
+          % for p in [p for p in contdict['people'] if p not in contdict['details'][7]]:
           <option value="{{p[1]}}">{{p[0]}}</option>
-          %end
+          % end
       </select>
       <input value="Add Person" type="submit" />
     % elif contdict['details'][6] == 'person':
-          %for o in [o for o in contdict['orgs'] if o not in contdict['details'][7]]:
+          % for o in [o for o in contdict['orgs'] if o not in contdict['details'][7]]:
           <option value="{{o[1]}}">{{o[0]}}</option>
-          %end
+          % end
       </select>
       <input value="Add Organisation" type="submit" />
     % end
