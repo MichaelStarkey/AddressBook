@@ -12,14 +12,14 @@
     </ul>
     <ul id="peopleList">
       <li id="head"><strong>People</strong></li>
-      %for p in contdict['people']:
+      % for p in contdict['people']:
       <a href="/contact/{{p[1]}}"><li>{{p[0]}}</li></a>
-      %end
+      % end
     </ul>
     <ul id="orgsList">
       <li id="head"><strong>Organisations</strong></li>
-      %for o in contdict['orgs']:
+      % for o in contdict['orgs']:
       <a href="/contact/{{o[1]}}"><li>{{o[0]}}</li></a>
-      %end
+      % end
     </ul>
   </div>
