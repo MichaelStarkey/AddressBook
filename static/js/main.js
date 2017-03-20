@@ -4,7 +4,6 @@ function _(element) {
 }
 
 function checkName() {
-  console.log("sadsd")
   if (_('name').value != ''){
     _('submit').removeAttribute("disabled");
     _('submit').setAttribute("value", "Submit");
