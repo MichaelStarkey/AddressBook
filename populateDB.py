@@ -56,6 +56,7 @@ c.execute("SELECT * FROM contact, partOf")
 
 if c.fetchall() != []:
     print('database must be empty to populate, use $python clearDB.py to clear.')
+    c.close()
     sys.exit()
 
 for p in people:
