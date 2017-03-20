@@ -6,3 +6,5 @@ c.execute("DELETE FROM contact")
 c.execute("DELETE FROM partOf")
 conn.commit()
 c.close()
+
+print('database cleared.')

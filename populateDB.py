@@ -1,4 +1,5 @@
 import sqlite3
+import sys
 
 people = [{
         'name': 'Anthony',
@@ -51,6 +52,11 @@ orgs = [{
 partOf = [(1,4),(1,5),(2,5),(2,6)]
 conn = sqlite3.connect('database.db')
 c = conn.cursor()
+c.execute("SELECT * FROM contact, partOf")
+
+if c.fetchall() != []:
+    print('database must be empty to populate, use $python clearDB.py to clear.')
+    sys.exit()
 
 for p in people:
     c.execute("INSERT INTO contact (name, email, phone, addrOne, addrTwo, addrThree, type) VALUES (?,?,?,?,?,?,?)",
@@ -65,3 +71,5 @@ for t in partOf:
 
 conn.commit()
 c.close()
+
+print('database populated.')

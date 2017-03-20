@@ -4,8 +4,8 @@ import sqlite3
 
 # Returns all contact names from the database in the format:
 #   {people: [(personA, idA), (personB, idB),...], orgs: [(orgA, idA), (orgB, idB),...]}
-def getAll():  
-    c = sqlite3.connect('database.db').conn.cursor()
+def getAll():
+    c = sqlite3.connect('database.db').cursor()
     c.execute("SELECT name, id FROM contact WHERE type = 'person' ORDER BY name COLLATE NOCASE")
     people = c.fetchall()
     c.execute("SELECT name, id FROM contact WHERE type = 'organisation' ORDER BY name COLLATE NOCASE")
@@ -18,7 +18,7 @@ def getAll():
 #   (name, email, phone, addrOne, addrTwo, addrThree, type, [(contact, contactID),...])
 #   NOTE: if the contact has no linked people / organisation the final tuple will be blank
 def getDetails(id):
-    c = sqlite3.connect('database.db').conn.cursor()
+    c = sqlite3.connect('database.db').cursor()
     c.execute("SELECT name, email, phone, addrOne, addrTwo, addrThree, type FROM contact WHERE id = (?)", (id,))
     details = c.fetchone()
     if details[6] == 'person':
@@ -36,7 +36,7 @@ def getDetails(id):
 
 # queries database for specific contact id and returns the name
 def getName(id):
-    c = sqlite3.connect('database.db').conn.cursor()
+    c = sqlite3.connect('database.db').cursor()
     c.execute("SELECT name FROM contact WHERE id = (?)", (id,))
     name = c.fetchone()
     c.close()
@@ -45,7 +45,7 @@ def getName(id):
 # queries database for several contact ids
 #   output: [[name, id], [name, id], ...]
 def getNames(ids):
-    c = sqlite3.connect('database.db').conn.cursor()
+    c = sqlite3.connect('database.db').cursor()
     names = []
     for i in ids:
         c.execute("SELECT name FROM contact WHERE id = (?)", i)
